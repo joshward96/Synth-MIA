@@ -1,0 +1,5 @@
+__pycache__/
+synth_mia.egg-info*
+.tox*
+.pytest_cache*
+**/ckpt/

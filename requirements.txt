@@ -1,0 +1,8 @@
+pandas
+scipy
+numpy
+scikit-learn
+tqdm
+torch
+geomloss
+# pytest # for testing only
