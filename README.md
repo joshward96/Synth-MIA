@@ -4,8 +4,6 @@
 [![Python Version](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)  
 
 
-![image](assets/system.png)
-
 
 **Synth_MIA** is an open-source library for performing Membership Inference Attacks (MIA) on generative models. It provides a suite of tools and methodologies to evaluate privacy risks in modern generative machine learning systems. 
 
@@ -42,53 +40,47 @@ Below is an example script illustrating the process:
 ```python
 import pandas as pd
 import numpy as np
-from synth_mia import GenLRA, DCR, MC, LOGAN, DCRDiff, DPI, DOMIAS, DensityEstimate, LocalNeighborhood, Classifier
+from synth_mia.attackers import *
+from synth_mia import utils, evaluation
 
-# Load the datasets (update the paths as needed)
-mem = pd.read_csv('example_data/housing/mem.csv').values
-non_mem = pd.read_csv('example_data/housing/non_mem.csv').values
-ref = pd.read_csv('example_data/housing/ref.csv').values
-synth = pd.read_csv('example_data/housing/synth.csv').values
+# Load the data used in the training of the model, the test set, and the final synthetic data
+train_set = pd.read_csv('../example_data/insurance/train_set.csv')
+test_set = pd.read_csv('../example_data/insurance/holdout_set.csv')
+synth_set = pd.read_csv('../example_data/insurance/bayesian_network_synth_250.csv')
 
-# Initialize instances of various attackers.
-# You can adjust hyperparameters as required.
-att1 = GenLRA(hyper_parameters={'k_nearest': 200})
-att2 = DCR()
-att3 = DPI()
-att4 = LOGAN()
-att5 = DCRDiff()
-att6 = DOMIAS()
-att7 = MC()
-att8 = DensityEstimate(hyper_parameters={"estimation_method": "kde"})
-att9 = LocalNeighborhood()
-att10 = classifier()
+# Split the test set into a non-member set and a reference set
+non_member_set, reference_set = utils.create_random_equal_dfs(test_set, 250, num_dfs=2, seed=42)
 
-# List of all attacker instances
-attackers = [att1, att2, att3, att4, att5, att6, att7, att8, att9, att10]
+# Preprocess dataframes into encoded numpy arrays
+prep = utils.TabularPreprocessor(fit_target='synth', categorical_encoding='one-hot', numeric_encoding='standard')
 
-# Dictionary to store evaluation results for each attacker
+# Fit on chosen target (ref is optional if fit_target='synth')
+prep.fit(train_set, non_member_set, synth_set)
+
+# Transform all datasets
+mem, non_mem, synth, ref, transformer = prep.transform(train_set, non_member_set, synth_set)
+
+# Create instances of your attackers
+att1 = DCR()
+
+# Run attacks and evaluate results
 results = {}
+attackers = [att1]
 
 for attacker in attackers:
-    # Execute the attack.
-    # The attack method returns a tuple containing:
-    #   - scores: Attack confidence scores for each sample.
-    #   - true_labels: Ground truth membership labels.
-    scores, true_labels = attacker.attack(mem, non_mem, synth, ref)
+    # Run the attack
+    true_labels, scores = attacker.attack(mem, non_mem, synth, ref)
     
-    # Evaluate the attack using the ROC metric.
-    eval_results = attacker.eval(scores, true_labels, metrics=['roc'])
+    # Evaluate the attack
+    eval_results = attacker.eval(true_labels, scores, metrics=['roc'])
     
-    # Save the evaluation results with the attacker name as key.
+    # Store results
     results[attacker.name] = eval_results
 
-# Display the results in a transposed DataFrame for easier interpretation.
-print(pd.DataFrame(results).T)
+# Print results
+pd.DataFrame(results).T
 ```
-
-
 
 ## License
 
 This project is licensed under the MIT License. 
-# Synth-MIA
