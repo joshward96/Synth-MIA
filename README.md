@@ -7,14 +7,6 @@
 
 **Synth-MIA** is a comprehensive open-source framework for conducting membership inference attacks (MIA) on synthetic tabular data generators. The library provides a unified interface for implementing and evaluating various privacy attacks, enabling researchers and practitioners to assess the privacy risks of their synthetic data generation models.
 
-## Features
-
-- **Multiple Attack Methods**: Implements 10 different membership inference attack algorithms
-- **Unified API**: Consistent interface across all attack methods via `BaseAttacker` class
-- **Flexible Data Processing**: Robust preprocessing pipeline with `TabularPreprocessor`
-- **Comprehensive Evaluation**: Built-in evaluation metrics including ROC, classification, privacy, and epsilon-differential privacy analysis
-- **Extensible Architecture**: Easy to extend with custom attack implementations
-
 ## Available Attack Methods
 
 - **DCR**: Distance-based Closest Record attack
@@ -200,3 +192,4 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 - **Issues**: Anonymized
 
 For questions or suggestions, please open an issue on GitHub.
+
