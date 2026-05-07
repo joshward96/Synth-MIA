@@ -9,16 +9,16 @@
 
 ## Available Attack Methods
 
-- **DCR**: Distance-based Closest Record attack
+- **DCR**: Distance Closest Record 
 - **DCRDiff**: Calibrated variant of DCR
-- **GenLRA**: Generative Model Likelihood Ratio Attack
+- **GenLRA**: Generative Likelihood Ratio Attack
 - **LOGAN**: LOss-based Generative Adversarial Network attack
 - **DOMIAS**: DOMIAS
 - **DPI**: Data Plagiarism Index
 - **MC**: Monte Carlo-based attack
-- **Classifier**: Machine learning classifier-based attack
-- **LocalNeighborhood**: Local neighborhood-based attack
-- **DensityEstimate**: Density estimation-based attack
+- **Classifier**: Machine learning classifier attack
+- **LocalNeighborhood**: Local neighborhood attack
+- **DensityEstimate**: Density estimation attack
 
 ## Installation
 
