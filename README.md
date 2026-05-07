@@ -108,7 +108,7 @@ results = {}
 for attacker in attackers:
     true_labels, scores = attacker.attack(mem, non_mem, synth, ref)
     eval_results = attacker.eval(true_labels, scores, metrics=['roc', 'privacy'])
-    results[attacker.__class__.__name__] = eval_results
+    results[attacker.name] = eval_results
 
 # Convert to DataFrame for easy analysis
 import pandas as pd
@@ -134,6 +134,44 @@ results = attacker.eval(true_labels, scores, metrics=['privacy'])
 results = attacker.eval(true_labels, scores, metrics=['epsilon'], confidence_level=0.9)
 ```
 
+## Replicating Paper Experiments
+
+The experiments from the paper can be replicated using the benchmark data and scripts provided in this repository.
+
+### Step 1: Download the Benchmark Data
+
+Pull the benchmark datasets from Hugging Face and place them in the `experiments/data` directory:
+
+```bash
+# Using the Hugging Face CLI
+huggingface-cli download joshward/synth-mia-benchmark --repo-type dataset --local-dir experiments/data
+```
+
+Alternatively, you can download the data directly from [https://huggingface.co/datasets/joshward/synth-mia-benchmark](https://huggingface.co/datasets/joshward/synth-mia-benchmark) and manually place the contents into the `experiments/data` directory.
+
+### Step 2: Run the Attack Experiments
+
+Once the data is in place, execute the full attack benchmark by running:
+
+```bash
+python run_attack_experiment.py \
+    --base_dir exp_data/ \
+    --json_output mia_results.json \
+    --log_dir experiment_logs
+```
+
+This script will run all attack methods across the benchmark datasets and output the resulting MIA and fidelity metrics.
+
+### Step 3: Reproduce Paper Figures and Tables
+
+For convenience, the results of our experiments are already included in the repository as `MIA_results.json`. To reproduce the figures and tables from the paper directly, open and run the provided notebook:
+
+```bash
+jupyter notebook experiments/analyze_final_data.ipynb
+```
+
+This notebook loads `MIA_results.json` and regenerates all paper figures and tables, so you can replicate the analysis without needing to re-run the full attack experiments.
+
 ## Project Structure
 
 ```
@@ -145,8 +183,6 @@ synth_mia/
 └── attackers/           # Attack implementations
     ├── dcr.py           # Distance-based Closest Record
     ├── gen_lra.py       # Generalized Likelihood Ratio Attack
-    ├── logan.py         # LOss-based GAN attack
-    ├── domias.py        # Distance-based One-class Model attack
     └── ...              # Additional attack methods
 ```
 
@@ -180,7 +216,7 @@ Anonymized
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache 2.0 License - see the [LICENSE](LICENSE) file for details.
 
 ## Contributing
 
@@ -192,4 +228,3 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 - **Issues**: Anonymized
 
 For questions or suggestions, please open an issue on GitHub.
-
