@@ -1,0 +1,39 @@
+name: gen-lra
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pytorch=2.2.1
+  - pytorch-cuda=12.1      # GPU required only for data generation (generate_data.py)
+  - pip
+  # Core scientific stack
+  - numpy>=2.0
+  - pandas>=2.0
+  - scipy>=1.10
+  - scikit-learn>=1.5
+  - matplotlib>=3.8
+  - tqdm>=4.60
+  - joblib
+  # Notebooks
+  - jupyter
+  - ipykernel
+  - pip:
+    # Generative models
+    - synthcity==0.2.11
+    - arfpy==0.1.1
+    - transformers==4.46.1
+    - peft
+    # Evaluation
+    - xgboost>=2.0
+    - prdc>=0.2
+    # Ablations / plots
+    - category-encoders>=2.6
+    - adjustText>=1.0
+
+# Local packages — install after creating the environment:
+#   pip install -e ./synth_mia
+#   pip install -e ./models/REaLTabFormer
+#   pip install -e ./models/TabSyn

@@ -1,0 +1,95 @@
+{
+    "name": "test_dataset",
+    "task_type": "binclass",
+    "header": "infer",
+    "column_names": [
+        "GLCM_Pan",
+        "Mean_G",
+        "Mean_R",
+        "Mean_NIR",
+        "SD_Plan",
+        "class"
+    ],
+    "num_col_idx": [
+        0,
+        1,
+        2,
+        3,
+        4
+    ],
+    "cat_col_idx": [],
+    "target_col_idx": [
+        5
+    ],
+    "file_type": "csv",
+    "data_path": "./data/test_dataset/test_dataset.csv",
+    "test_path": null,
+    "column_info": {
+        "0": {},
+        "type": "categorical",
+        "max": 103.536494,
+        "min": 0.0,
+        "1": {},
+        "2": {},
+        "3": {},
+        "4": {},
+        "5": {},
+        "categorizes": [
+            "all other land cover",
+            "Diseased Tree"
+        ]
+    },
+    "train_num": 1451,
+    "test_num": 162,
+    "idx_mapping": {
+        "0": 0,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5
+    },
+    "inverse_idx_mapping": {
+        "0": 0,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5
+    },
+    "idx_name_mapping": {
+        "0": "GLCM_Pan",
+        "1": "Mean_G",
+        "2": "Mean_R",
+        "3": "Mean_NIR",
+        "4": "SD_Plan",
+        "5": "class"
+    },
+    "metadata": {
+        "columns": {
+            "0": {
+                "sdtype": "numerical",
+                "computer_representation": "Float"
+            },
+            "1": {
+                "sdtype": "numerical",
+                "computer_representation": "Float"
+            },
+            "2": {
+                "sdtype": "numerical",
+                "computer_representation": "Float"
+            },
+            "3": {
+                "sdtype": "numerical",
+                "computer_representation": "Float"
+            },
+            "4": {
+                "sdtype": "numerical",
+                "computer_representation": "Float"
+            },
+            "5": {
+                "sdtype": "categorical"
+            }
+        }
+    }
+}

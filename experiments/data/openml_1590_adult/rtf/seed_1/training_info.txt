@@ -1,0 +1,5 @@
+Model: rtf
+Seed: 1
+Training time: 2908.05 seconds
+Member set size: 36177
+Generated multipliers: [1, 2, 3]

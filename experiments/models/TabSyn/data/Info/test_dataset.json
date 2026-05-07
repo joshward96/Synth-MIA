@@ -1,0 +1,20 @@
+{
+    "name": "test_dataset",
+    "task_type": "binclass",
+    "header": "infer",
+    "column_names": null,
+    "num_col_idx": [
+        0,
+        1,
+        2,
+        3,
+        4
+    ],
+    "cat_col_idx": [],
+    "target_col_idx": [
+        5
+    ],
+    "file_type": "csv",
+    "data_path": "./data/test_dataset/test_dataset.csv",
+    "test_path": null
+}
